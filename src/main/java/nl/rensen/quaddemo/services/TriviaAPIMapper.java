@@ -9,15 +9,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class TriviaAPIMapper {
     private final RestClient client;
-    private final ModelMapper modelMapper;
     private final QuestionRepository repos;
 
-    public TriviaAPIMapper(ModelMapper modelMapper, QuestionRepository repos){
-        this.modelMapper = modelMapper;
+    public TriviaAPIMapper(QuestionRepository repos){
         this.repos = repos;
         client = RestClient.builder().baseUrl("https://opentdb.com/").build();
     }
@@ -37,6 +36,10 @@ public class TriviaAPIMapper {
         }
         List<QuestionModel> results = response.getResults();
         results.forEach(repos::saveQuestion);
+//                q -> {
+//            UUID uuid = repos.saveQuestion(q);
+//            q.setId(uuid);
+//        });
         return results;
     }
 }

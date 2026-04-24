@@ -24,6 +24,7 @@ public class QuestionRepository {
     public UUID saveQuestion(QuestionModel question){
         UUID uuid = UUID.randomUUID();
         db.put(uuid, question);
+        question.setId(uuid);
         return uuid;
     }
 

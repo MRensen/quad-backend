@@ -12,6 +12,18 @@ public class QuestionModel {
     private String correct_answer;
     private List<String> incorrect_answers;
 
+    public QuestionModel(String type, String difficulty, String category, String question, String correct_answer, List<String> incorrect_answers) {
+        this.type = type;
+        this.difficulty = difficulty;
+        this.category = category;
+        this.question = question;
+        this.correct_answer = correct_answer;
+        this.incorrect_answers = incorrect_answers;
+    }
+
+    public QuestionModel() {
+    }
+
     public UUID getId() {
         return id;
     }
