@@ -1,5 +1,5 @@
 # Build fase
-FROM eclipse-temurin:21-jdk-alpine as build
+FROM eclipse-temurin:25-jdk-alpine as build
 
 # Install Maven
 RUN apk add --no-cache maven
@@ -15,7 +15,7 @@ COPY src ./src
 RUN mvn clean package spring-boot:repackage -DskipTests
 
 # Runtime fase
-FROM eclipse-temurin:21-jre-alpine
+FROM eclipse-temurin:25-jre-alpine
 
 # Set working dir
 WORKDIR /app
