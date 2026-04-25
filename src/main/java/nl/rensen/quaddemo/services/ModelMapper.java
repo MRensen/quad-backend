@@ -5,7 +5,6 @@ import nl.rensen.quaddemo.models.QuestionOutputDto;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 public class ModelMapper {
@@ -14,12 +13,15 @@ public class ModelMapper {
         if(model == null){
             return null;
         }
+        List<String> answers = model.getIncorrect_answers();
+        answers.add(model.getCorrect_answer());
         return new QuestionOutputDto(
                 model.getId(),
                 model.getType(),
                 model.getDifficulty(),
                 model.getCategory(),
-                model.getQuestion()
+                model.getQuestion(),
+                answers
         );
     }
 

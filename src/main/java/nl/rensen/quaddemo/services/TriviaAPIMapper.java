@@ -1,14 +1,16 @@
 package nl.rensen.quaddemo.services;
 
 import nl.rensen.quaddemo.exceptions.TriviaApiMapperException;
+import nl.rensen.quaddemo.models.AnswerInputDto;
 import nl.rensen.quaddemo.models.QuestionModel;
-import nl.rensen.quaddemo.models.QuestionOutputDto;
 import nl.rensen.quaddemo.models.TriviaResponse;
 import nl.rensen.quaddemo.repositories.QuestionRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Service
@@ -36,10 +38,20 @@ public class TriviaAPIMapper {
         }
         List<QuestionModel> results = response.getResults();
         results.forEach(repos::saveQuestion);
-//                q -> {
-//            UUID uuid = repos.saveQuestion(q);
-//            q.setId(uuid);
-//        });
         return results;
+    }
+
+    public Boolean checkAnswer(AnswerInputDto dto) {
+        QuestionModel model = repos.getQuestion(dto.getId());
+        return model.getCorrect_answer().equals(dto.getAnswer());
+    }
+
+    public Map<UUID, Boolean> checkAnswers(List<AnswerInputDto> dtos) {
+        Map<UUID, Boolean> result = new HashMap();
+        for (AnswerInputDto dto : dtos){
+            Boolean boolResult = checkAnswer(dto);
+            result.put(dto.getId(), boolResult);
+        }
+        return result;
     }
 }

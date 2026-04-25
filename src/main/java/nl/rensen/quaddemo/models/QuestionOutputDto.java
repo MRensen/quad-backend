@@ -26,16 +26,26 @@ public class QuestionOutputDto {
     private String difficulty;
     private String category;
     private String question;
+    private List<String> answers;
 
-    public QuestionOutputDto(UUID id, String type, String difficulty, String category, String question) {
+    public QuestionOutputDto(UUID id, String type, String difficulty, String category, String question, List<String> answers) {
         this.id = id;
         this.type = type;
         this.difficulty = difficulty;
         this.category = category;
         this.question = question;
+        this.answers = answers;
     }
 
     public QuestionOutputDto() {
+    }
+
+    public List<String> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(List<String> answers) {
+        this.answers = answers;
     }
 
     public UUID getId() {
