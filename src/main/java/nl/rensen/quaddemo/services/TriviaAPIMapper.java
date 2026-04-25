@@ -24,6 +24,9 @@ public class TriviaAPIMapper {
     }
 
     public List<QuestionModel> getQuestions(Integer amount){
+//        reset database
+        repos.clear();
+//        vraag nieuwe vragen op
         TriviaResponse response = client
                 .get()
                 .uri(uri -> uri

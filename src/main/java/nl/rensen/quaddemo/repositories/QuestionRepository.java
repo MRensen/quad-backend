@@ -35,4 +35,8 @@ public class QuestionRepository {
         }
         return question;
     }
+
+    public void clear(){
+        db.clear();
+    }
 }
