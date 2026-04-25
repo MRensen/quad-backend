@@ -24,7 +24,7 @@ public class TriviaAPIMapper {
     }
 
     public List<QuestionModel> getQuestions(Integer amount){
-//        reset database
+//        reset database, zodat deze niet vol loopt
         repos.clear();
 //        vraag nieuwe vragen op
         TriviaResponse response = client
@@ -40,6 +40,7 @@ public class TriviaAPIMapper {
             throw new TriviaApiMapperException("Er is ging iets mis bij de API");
         }
         List<QuestionModel> results = response.getResults();
+//        Sla nieuwe vragen op in de db
         results.forEach(repos::saveQuestion);
         return results;
     }

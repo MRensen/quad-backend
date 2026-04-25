@@ -1,5 +1,6 @@
 package nl.rensen.quaddemo.services;
 
+import nl.rensen.quaddemo.models.AnswerInputDto;
 import nl.rensen.quaddemo.models.QuestionModel;
 import nl.rensen.quaddemo.repositories.QuestionRepository;
 import org.junit.jupiter.api.Test;
@@ -44,7 +45,19 @@ class TriviaAPIMapperTest {
 //            Het id wordt niet gezet in deze mock, maar wordt al wel in een andere unittest geverifieerd
 //            assertEquals(uuid, question.getId());
         }
-
-//        TODO test voor getAnswer
+    }
+    @Test
+    void getAnswer(){
+        // arrange
+        UUID uuid = UUID.randomUUID();
+        AnswerInputDto dto = new AnswerInputDto();
+        dto.setAnswer("answer");
+        dto.setId(uuid);
+        QuestionModel model = new QuestionModel("type", "difficulty", "category", "question", "answer", List.of("wrong answers"));
+        Mockito.when(repos.getQuestion(uuid)).thenReturn(model);
+        // act
+        Boolean bool = triviaAPIMapper.checkAnswer(dto);
+        // assert
+        assertTrue(bool);
     }
 }
