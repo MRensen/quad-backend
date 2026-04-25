@@ -2,7 +2,6 @@ package nl.rensen.quaddemo.repositories;
 
 import nl.rensen.quaddemo.exceptions.TriviaDatabaseException;
 import nl.rensen.quaddemo.models.QuestionModel;
-import nl.rensen.quaddemo.models.QuestionOutputDto;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
